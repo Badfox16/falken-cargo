@@ -7,6 +7,8 @@ import { SQLiteProvider } from './app/db/SQLiteContext';
 import HomeScreen from './app/screens/HomeScreen';
 import Login from './app/screens/LoginScreen';
 import Cadastro from './app/screens/Cadastro';
+import CargaScreen from './app/screens/CargaScreen';
+import PropostaScreen from './app/screens/PropostaScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,24 +17,24 @@ export default function App() {
     <SQLiteProvider>
       <NavigationContainer>
         <Tab.Navigator
-          initialRouteName="Home"
+          initialRouteName="Inicio"
           screenOptions={({ route }) => ({
             tabBarIcon: ({ color, size }) => {
               let iconName;
-              if (route.name === 'Home') {
+              if (route.name === 'Inicio') {
                 iconName = 'home';
-              } else if (route.name === 'Login') {
+              } else if (route.name === 'Cargas') {
                 iconName = 'log-in';
-              } else if (route.name === 'Cadastro') {
+              } else if (route.name === 'Propostas') {
                 iconName = 'person-add';
               }
               return <Ionicons name={iconName} size={size} color={color} />;
             },
           })}
         >
-          <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Login" component={Login} />
-          <Tab.Screen name="Cadastro" component={Cadastro} />
+          <Tab.Screen name="Inicio" component={HomeScreen} />
+          <Tab.Screen name="Cargas" component={CargaScreen} />
+          <Tab.Screen name="Propostas" component={PropostaScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </SQLiteProvider>
