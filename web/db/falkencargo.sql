@@ -39,7 +39,6 @@ CREATE TABLE tbProposta (
     idProposta INT AUTO_INCREMENT PRIMARY KEY,
     idCarga INT NOT NULL,
     idTransportadora INT NOT NULL,
-    precoOferecido DECIMAL(10, 2),
     estado ENUM('pendente', 'aceita', 'rejeitada') DEFAULT 'pendente',
     dataProposta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (idCarga) REFERENCES tbCarga(idCarga),

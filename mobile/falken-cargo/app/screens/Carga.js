@@ -2,14 +2,16 @@ import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity, ScrollView
 import React from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useAuth } from '../context/AuthContext';
 import { API_BASE_URL } from '@env';
 
 export default function Carga() {
     const Carga = useRoute().params.Carga
     const navigation = useNavigation()
+    const { user } = useAuth();
 
     const salvar = async () => {
-        console.log("Xooo");
+        console.log(user);
 
     }
     return (

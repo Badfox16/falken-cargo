@@ -40,7 +40,7 @@
     </ul>
     <hr>
     <div class="d-flex flex-column">
-        <a href="#" class="d-flex align-items-center text-white text-decoration-none m-2 btn" style="background-color: #343a40; border: none;">
+        <a href="../../controllers/usuario/logout.php" class="d-flex align-items-center text-white text-decoration-none m-2 btn" style="background-color: #343a40; border: none;">
             <i class="fa fa-sign-out mx-2"></i>
             <strong>Logout</strong>
         </a>        

@@ -9,6 +9,7 @@ dotenv.config();
 
 const userRoutes = require('./routes/userRoutes');
 const cargaRoutes = require('./routes/cargaRoutes');
+const propostaRoutes = require('./routes/cargaRoutes');
 
 const app = express();
 
@@ -25,5 +26,5 @@ app.use('/api/cargas', cargaRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Servidor a correr na porta: ${PORT}`);
 });
