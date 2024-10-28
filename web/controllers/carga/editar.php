@@ -1,6 +1,6 @@
 <?php
-require_once '../../../dao/CargaDAO.php';
-require_once '../../../model/Carga.php';
+require_once __DIR__ . '/../../dao/CargaDAO.php';
+require_once __DIR__ . '/../../model/carga.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idCarga = $_POST['id_Carga'];

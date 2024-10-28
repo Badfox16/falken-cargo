@@ -102,7 +102,7 @@ $Cargas = $CargaDAO->getByUserId($idUsuario);
                             <th>Origem</th>
                             <th>Destino</th>
                             <th>Preço do Frete</th>
-                            <th>Foto</th>
+                            <th>Estado</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -117,16 +117,16 @@ $Cargas = $CargaDAO->getByUserId($idUsuario);
                                 <td><?= $Carga->getOrigem(); ?></td>
                                 <td><?= $Carga->getDestino(); ?></td>
                                 <td><?= $Carga->getPrecoFrete(); ?></td>
-                                <td><img src="../../../server/<?= $Carga->getCaminhoFoto(); ?>" alt="Foto da Carga" width="50"></td>
+                                <td><?= $Carga->getEstado(); ?></td>
                                 <td>
                                     <a href="#" class="editButton" data-bs-toggle="modal" data-bs-target="#editModal<?= $Carga->getIdCarga(); ?>">
                                         <span style="font-size: 1.5rem; color:#000; padding-left: 16px;" aria-hidden="true">
                                             <i class="fa fa-edit"></i>
                                         </span>
                                     </a>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $Carga->getIdCarga(); ?>">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#viewModal<?= $Carga->getIdCarga(); ?>">
                                         <span style="font-size: 1.5rem; color:#000; padding-left: 16px;" aria-hidden="true">
-                                            <i class="fa fa-trash"></i>
+                                            <i class="fa fa-eye"></i>
                                         </span>
                                     </a>
                                 </td>
@@ -177,23 +177,27 @@ $Cargas = $CargaDAO->getByUserId($idUsuario);
                                 </div>
                             </div>
 
-                            <!-- Delete Modal -->
-                            <div class="modal fade" id="deleteModal<?= $Carga->getIdCarga(); ?>" tabindex="-1" aria-labelledby="deleteModalLabel<?= $Carga->getIdCarga(); ?>" aria-hidden="true">
+                            <!-- View Modal -->
+                            <div class="modal fade" id="viewModal<?= $Carga->getIdCarga(); ?>" tabindex="-1" aria-labelledby="viewModalLabel<?= $Carga->getIdCarga(); ?>" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="deleteModalLabel<?= $Carga->getIdCarga(); ?>">Confirmar Exclusão</h5>
+                                            <h5 class="modal-title" id="viewModalLabel<?= $Carga->getIdCarga(); ?>">Detalhes da Carga</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            Tem certeza que deseja excluir a carga <b><?= $Carga->getDescricao(); ?></b>?
+                                            <p><strong>ID:</strong> <?= $Carga->getIdCarga(); ?></p>
+                                            <p><strong>Descrição:</strong> <?= $Carga->getDescricao(); ?></p>
+                                            <p><strong>Tipo de Carga:</strong> <?= $Carga->getTipoCarga(); ?></p>
+                                            <p><strong>Origem:</strong> <?= $Carga->getOrigem(); ?></p>
+                                            <p><strong>Destino:</strong> <?= $Carga->getDestino(); ?></p>
+                                            <p><strong>Preço do Frete:</strong> <?= $Carga->getPrecoFrete(); ?></p>
+                                            <p><strong>Estado:</strong> <?= $Carga->getEstado(); ?></p>
+                                            <p><strong>Foto:</strong></p>
+                                            <img src="../../../server/<?= $Carga->getCaminhoFoto(); ?>" alt="Foto da Carga" class="img-fluid">
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                            <form action="../../controllers/carga/apagar.php" method="post">
-                                                <input type="hidden" name="id_Carga" value="<?= $Carga->getIdCarga(); ?>">
-                                                <button type="submit" class="btn btn-danger">Excluir</button>
-                                            </form>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                                         </div>
                                     </div>
                                 </div>
