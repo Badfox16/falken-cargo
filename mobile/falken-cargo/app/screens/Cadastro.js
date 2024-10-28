@@ -14,7 +14,7 @@ export default function Cadastro() {
 
   useEffect(() => {
     if (dbReady) {
-      loadUsers();
+      // loadUsers();
     }
   }, [dbReady]);
 
