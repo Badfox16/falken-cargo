@@ -5,6 +5,7 @@ exports.getAllCargas = (req, res) => {
         SELECT tbCarga.*, tbUsuario.nome, tbUsuario.apelido 
         FROM tbCarga 
         JOIN tbUsuario ON tbCarga.idUsuario = tbUsuario.idUsuario
+        WHERE tbCarga.estado = 'pendente'
     `;
     
     db.query(query, (err, results) => {

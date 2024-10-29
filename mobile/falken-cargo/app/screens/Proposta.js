@@ -6,8 +6,8 @@ import { useAuth } from '../context/AuthContext';
 import { API_BASE_URL } from '@env';
 import axios from 'axios';
 
-export default function Carga() {
-    const Carga = useRoute().params.Carga
+export default function Proposta() {
+    const Proposta = useRoute().params.Proposta
     const navigation = useNavigation()
     const { user } = useAuth();
 
@@ -15,7 +15,7 @@ export default function Carga() {
         try {
             const response = await axios.post(`${API_BASE_URL}/api/propostas/criar`, {
                 idTransportadora: user?.idTransportadora,
-                idCarga: Carga.idCarga,
+                idProposta: Proposta.idProposta,
             });
             if (response.status === 201) {
                 alert('Proposta submetida com sucesso!');
@@ -34,27 +34,27 @@ export default function Carga() {
                     <Ionicons name="arrow-back-circle-outline" size={28} color={'tomato'} />
                 </TouchableOpacity>
             </View>
-            <Image source={{ uri: `${API_BASE_URL}${Carga.caminhoFoto}` }} style={styles.imagem} />
-            <Text style={styles.titulo}>{Carga.descricao}</Text>
+            <Image source={{ uri: `${API_BASE_URL}${Proposta.caminhoFoto}` }} style={styles.imagem} />
+            <Text style={styles.titulo}>{Proposta.descricao}</Text>
             <View style={{ display: 'flex', flexDirection: 'row' }}>
-                <Text style={styles.titulo2}>Tipo de Carga:</Text>
-                <Text style={styles.texto}> {Carga.tipoCarga}</Text>
+                <Text style={styles.titulo2}>Tipo de Proposta:</Text>
+                <Text style={styles.texto}> {Proposta.tipoProposta}</Text>
             </View>
             <View style={{ display: 'flex', flexDirection: 'row' }}>
                 <Text style={styles.titulo2}>Origem:</Text>
-                <Text style={styles.description}> {Carga.origem}</Text>
+                <Text style={styles.description}> {Proposta.origem}</Text>
             </View>
             <View style={{ display: 'flex', flexDirection: 'row' }}>
                 <Text style={styles.titulo2}>Destino:</Text>
-                <Text style={styles.texto}> {Carga.destino}</Text>
+                <Text style={styles.texto}> {Proposta.destino}</Text>
             </View>
             <View style={{ display: 'flex', flexDirection: 'row' }}>
                 <Text style={styles.titulo2}>Contratante:</Text>
-                <Text style={styles.description}> {Carga.nome} {Carga.apelido}</Text>
+                <Text style={styles.description}> {Proposta.nome} {Proposta.apelido}</Text>
             </View>
             <View style={{ display: 'flex', flexDirection: 'row' }}>
                 <Text style={styles.titulo2}>Preço:</Text>
-                <Text style={styles.texto}> {Carga.precoFrete},00 MZN</Text>
+                <Text style={styles.texto}> {Proposta.precoFrete},00 MZN</Text>
             </View>
             <TouchableOpacity onPress={() => salvar()} style={{ marginTop: 20, alignItems: 'center' }}>
                 <View style={{ backgroundColor: 'tomato', padding: 10, borderRadius: 5 }}>
