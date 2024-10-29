@@ -17,9 +17,11 @@ exports.getPropostasByTransportadora = (req, res) => {
     console.log(idTransportadora);
 
     const query = `
-        SELECT p.*, c.descricao, c.tipoCarga, c.origem, c.destino, c.precoFrete, c.caminhoFoto, c.estado AS estadoCarga
+        SELECT p.*, c.descricao, c.tipoCarga, c.origem, c.destino, c.precoFrete, c.caminhoFoto, c.estado AS estadoCarga,
+               u.nome AS nomeUsuario, u.apelido AS apelidoUsuario
         FROM tbProposta p
         JOIN tbCarga c ON p.idCarga = c.idCarga
+        JOIN tbUsuario u ON c.idUsuario = u.idUsuario
         WHERE p.idTransportadora = ?
     `;
     db.query(query, [idTransportadora], (err, results) => {

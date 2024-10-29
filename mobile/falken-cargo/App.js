@@ -12,6 +12,7 @@ import PropostaScreen from './app/screens/PropostaScreen';
 import DetalhesCarga from './app/screens/Carga';
 import { Ionicons } from 'react-native-vector-icons';
 import Login from './app/screens/LoginScreen';
+import Proposta from './app/screens/Proposta';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -66,6 +67,7 @@ function MainNavigator() {
         <>
           <Stack.Screen name="Tabs" component={TabNavigator} />
           <Stack.Screen name="Detalhes" component={DetalhesCarga} />
+          <Stack.Screen name="Proposta" component={Proposta} />
         </>
       ) : (
         <Stack.Screen name="Login" component={Login} />
