@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, RefreshControl } from 'react-native';
+import { View, Text, ScrollView, RefreshControl, LogBox } from 'react-native';
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { API_BASE_URL } from '@env';
@@ -23,6 +23,9 @@ export default function CargaScreen() {
 
   useEffect(() => {
     fetchCargas();
+    LogBox.ignoreLogs([
+      'VirtualizedLists should never be nested inside plain ScrollViews with the same orientation',
+    ]);
   }, []);
 
   const onRefresh = useCallback(() => {

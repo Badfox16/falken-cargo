@@ -20,13 +20,11 @@ const Stack = createNativeStackNavigator();
 function TabNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName="Inicio"
+      initialRouteName="Cargas"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
           let iconName;
-            if (route.name === 'Inicio') {
-            iconName = 'home-outline';
-            } else if (route.name === 'Cargas') {
+            if (route.name === 'Cargas') {
             iconName = 'cube-outline';
             } else if (route.name === 'Propostas') {
             iconName = 'document-text-outline';
@@ -38,7 +36,6 @@ function TabNavigator() {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Inicio" component={HomeScreen} />
       <Tab.Screen name="Cargas" component={CargaScreen} />
       <Tab.Screen name="Propostas" component={PropostaScreen} />
     </Tab.Navigator>

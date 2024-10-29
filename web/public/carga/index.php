@@ -92,11 +92,10 @@ $Cargas = $CargaDAO->getByUserId($idUsuario);
                     </div>
                 </div>
             </div>
-            <div class="">
+            <div class="mx-2">
                 <table class="table table-responsive-lg table-hover table-bordered mb-0">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Descrição</th>
                             <th>Tipo de Carga</th>
                             <th>Origem</th>
@@ -109,15 +108,12 @@ $Cargas = $CargaDAO->getByUserId($idUsuario);
                     <tbody>
                         <?php foreach ($Cargas as $Carga) : ?>
                             <tr style="height: 16px;">
-                                <td>
-                                    <span><b><?= $Carga->getIdCarga(); ?></b></span>
-                                </td>
                                 <td><?= $Carga->getDescricao(); ?></td>
                                 <td><?= $Carga->getTipoCarga(); ?></td>
                                 <td><?= $Carga->getOrigem(); ?></td>
                                 <td><?= $Carga->getDestino(); ?></td>
                                 <td><?= $Carga->getPrecoFrete(); ?></td>
-                                <td><?= $Carga->getEstado(); ?></td>
+                                <td><?= ucfirst($Carga->getEstado()); ?></td>
                                 <td>
                                     <a href="#" class="editButton" data-bs-toggle="modal" data-bs-target="#editModal<?= $Carga->getIdCarga(); ?>">
                                         <span style="font-size: 1.5rem; color:#000; padding-left: 16px;" aria-hidden="true">
@@ -186,13 +182,12 @@ $Cargas = $CargaDAO->getByUserId($idUsuario);
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <p><strong>ID:</strong> <?= $Carga->getIdCarga(); ?></p>
                                             <p><strong>Descrição:</strong> <?= $Carga->getDescricao(); ?></p>
                                             <p><strong>Tipo de Carga:</strong> <?= $Carga->getTipoCarga(); ?></p>
                                             <p><strong>Origem:</strong> <?= $Carga->getOrigem(); ?></p>
                                             <p><strong>Destino:</strong> <?= $Carga->getDestino(); ?></p>
                                             <p><strong>Preço do Frete:</strong> <?= $Carga->getPrecoFrete(); ?></p>
-                                            <p><strong>Estado:</strong> <?= $Carga->getEstado(); ?></p>
+                                            <p><strong>Estado:</strong> <?= ucfirst($Carga->getEstado()); ?></p>
                                             <p><strong>Foto:</strong></p>
                                             <img src="../../../server/<?= $Carga->getCaminhoFoto(); ?>" alt="Foto da Carga" class="img-fluid">
                                         </div>

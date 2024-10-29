@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, RefreshControl } from 'react-native';
+import { View, Text, ScrollView, RefreshControl, LogBox } from 'react-native';
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { API_BASE_URL } from '@env';
@@ -20,7 +20,6 @@ export default function PropostaScreen() {
         }
       });
       setPropostas(response.data);
-      console.log(response.data);
       
     } catch (error) {
       console.error('Error fetching Propostas:', error);
@@ -32,6 +31,9 @@ export default function PropostaScreen() {
 
   useEffect(() => {
     fetchPropostas();
+    LogBox.ignoreLogs([
+      'VirtualizedLists should never be nested inside plain ScrollViews with the same orientation',
+    ]);
   }, []);
 
   const onRefresh = useCallback(() => {

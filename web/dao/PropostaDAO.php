@@ -14,11 +14,10 @@ class PropostaDAO implements CrudInterface {
         if (!$entity instanceof Proposta) {
             throw new InvalidArgumentException('Expected instance of Proposta');
         }
-        $stmt = $this->pdo->prepare("INSERT INTO tbProposta (idCarga, idTransportadora, precoOferecido, estado) VALUES (?, ?, ?, ?)");
+        $stmt = $this->pdo->prepare("INSERT INTO tbProposta (idCarga, idTransportadora, estado) VALUES (?, ?, ?, ?)");
         $stmt->execute([
             $entity->getIdCarga(),
             $entity->getIdTransportadora(),
-            $entity->getPrecoOferecido(),
             $entity->getEstado()
         ]);
     }
@@ -33,7 +32,6 @@ class PropostaDAO implements CrudInterface {
             $proposta = new Proposta();
             $proposta->setIdCarga($data['idCarga']);
             $proposta->setIdTransportadora($data['idTransportadora']);
-            $proposta->setPrecoOferecido($data['precoOferecido']);
             $proposta->setEstado($data['estado']);
             return $proposta;
         }
@@ -45,16 +43,13 @@ class PropostaDAO implements CrudInterface {
         if (!$entity instanceof Proposta) {
             throw new InvalidArgumentException('Expected instance of Proposta');
         }
-        $stmt = $this->pdo->prepare("UPDATE tbProposta SET idCarga = ?, idTransportadora = ?, precoOferecido = ?, estado = ? WHERE idProposta = ?");
+        $stmt = $this->pdo->prepare("UPDATE tbProposta SET estado = ? WHERE idProposta = ?");
         $stmt->execute([
-            $entity->getIdCarga(),
-            $entity->getIdTransportadora(),
-            $entity->getPrecoOferecido(),
             $entity->getEstado(),
             $id
         ]);
     }
-
+    
     public function delete(int $id) {
         $stmt = $this->pdo->prepare("DELETE FROM tbProposta WHERE idProposta = ?");
         $stmt->execute([$id]);
@@ -71,6 +66,35 @@ class PropostaDAO implements CrudInterface {
             $proposta->setIdTransportadora($data['idTransportadora']);
             $proposta->setPrecoOferecido($data['precoOferecido']);
             $proposta->setEstado($data['estado']);
+            $propostas[] = $proposta;
+        }
+
+        return $propostas;
+    }
+
+    public function getPropostasByUsuario(int $idUsuario) {
+        $stmt = $this->pdo->prepare("
+            SELECT p.*, c.tipoCarga, c.precoFrete, c.destino, c.origem, c.descricao AS cargaDescricao, t.nome AS transportadoraNome
+            FROM tbProposta p
+            JOIN tbCarga c ON p.idCarga = c.idCarga
+            JOIN tbTransportadora t ON p.idTransportadora = t.idTransportadora
+            WHERE c.idUsuario = ?
+        ");
+        $stmt->execute([$idUsuario]);
+        $propostas = [];
+
+        while ($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $proposta = new Proposta();
+            $proposta->setIdProposta($data['idProposta']);
+            $proposta->setIdCarga($data['idCarga']);
+            $proposta->setIdTransportadora($data['idTransportadora']);
+            $proposta->setEstado($data['estado']);
+            $proposta->setTipoCarga($data['tipoCarga']);
+            $proposta->setPrecoFrete($data['precoFrete']);
+            $proposta->setDestino($data['destino']);
+            $proposta->setOrigem($data['origem']);
+            $proposta->setCargaDescricao($data['cargaDescricao']);
+            $proposta->setTransportadoraNome($data['transportadoraNome']);
             $propostas[] = $proposta;
         }
 
