@@ -86,7 +86,7 @@ $Propostas = $PropostaDAO->getPropostasByUsuario($idUsuario);
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                <a href="../../controllers/proposta/aceitar.php?id=<?= $proposta->getIdProposta(); ?>" class="btn btn-success">Aceitar</a>
+                                                <a href="../../controllers/proposta/aceitar.php?id=<?= $proposta->getIdProposta(); ?>&carga=<?= $proposta->getIdCarga(); ?>" class="btn btn-success">Aceitar</a>
                                                 <a href="../../controllers/proposta/recusar.php?id=<?= $proposta->getIdProposta(); ?>" class="btn btn-danger">Recusar</a>
                                             </div>
                                         </div>
