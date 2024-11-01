@@ -32,7 +32,8 @@ CREATE TABLE tbTransportadora (
     email VARCHAR(100) UNIQUE NOT NULL,
     telefone VARCHAR(20),
     caminhoFoto VARCHAR(255),
-    endereco VARCHAR(255)
+    endereco VARCHAR(255),
+    senha VARCHAR(255)
 );
 
 CREATE TABLE tbProposta (
