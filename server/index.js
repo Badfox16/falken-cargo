@@ -14,7 +14,7 @@ const propostaRoutes = require('./routes/propostaRoutes');
 const app = express();
 
 app.use(cors({
-  origin: 'exp://192.168.43.199:8081'
+  origin: 'exp://192.168.43.11:8081'
 }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
