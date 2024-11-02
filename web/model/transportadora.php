@@ -6,6 +6,7 @@ class Transportadora {
     private $telefone;
     private $caminhoFoto;
     private $endereco;
+    private $senha;
 
     public function __construct($nome=null, $email=null, $telefone=null, $caminhoFoto=null, $endereco=null) {
         $this->nome = $nome;
@@ -61,6 +62,14 @@ class Transportadora {
 
     public function setIdTransportadora($idTransportadora) {
         $this->idTransportadora = $idTransportadora;
+    }
+
+    public function getSenha() {
+        return $this->senha;
+    }
+
+    public function setSenha($senha) {
+        $this->senha = $senha;
     }
 }
 ?>

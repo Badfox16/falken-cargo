@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuarioDAO = new UsuarioDAO();
     $usuarioDAO->create($usuario);
 
-    header('Location: ../../views/usuario/'); 
+    header('Location: ../../private/usuario/'); 
     exit();
 }
 ?>

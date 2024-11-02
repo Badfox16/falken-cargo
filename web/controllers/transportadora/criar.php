@@ -26,11 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $transportadora->setEmail($email);
     $transportadora->setTelefone($telefone);
     $transportadora->setCaminhoFoto($caminhoFoto);
+    $transportadora->setSenha("admin");
 
     $transportadoraDAO = new TransportadoraDAO();
     $transportadoraDAO->create($transportadora);
 
-    header('Location: ../../views/transportadora/index.php');
+    header('Location: ../../private/transportadora/index.php');
     exit();
 }
 ?>
