@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, ScrollView, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, Button, ScrollView, StyleSheet, Image, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
+import axios from 'axios';
 
 const CargaForm = () => {
   const [descricao, setDescricao] = useState('');
@@ -24,8 +25,30 @@ const CargaForm = () => {
     }
   };
 
-  const handleSubmit = () => {
-    // Handle form submission
+  const handleSubmit = async () => {
+    const formData = new FormData();
+    formData.append('descricao', descricao);
+    formData.append('tipoCarga', tipoCarga);
+    formData.append('origem', origem);
+    formData.append('destino', destino);
+    formData.append('precoFrete', precoFrete);
+    if (foto) {
+      const filename = foto.split('/').pop();
+      const match = /\.(\w+)$/.exec(filename);
+      const type = match ? `image/${match[1]}` : `image`;
+      formData.append('foto', { uri: foto, name: filename, type });
+    }
+
+    try {
+      const response = await axios.post('http://your-server-url/cargas', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      Alert.alert('Sucesso', 'Carga adicionada com sucesso!');
+    } catch (error) {
+      Alert.alert('Erro', 'Ocorreu um erro ao adicionar a carga.');
+    }
   };
 
   return (
@@ -86,8 +109,6 @@ const CargaForm = () => {
       <Text style={styles.label}>Foto:</Text>
       <Button title="Escolher Foto" onPress={handlePhotoSelection} />
       {foto && <Image source={{ uri: foto }} style={styles.image} />}
-
-      <View></View>
 
       <Button title="Cadastrar" onPress={handleSubmit} />
     </ScrollView>
