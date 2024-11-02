@@ -20,15 +20,16 @@ exports.getAllCargas = (req, res) => {
 exports.addCarga = (req, res) => {
   const { descricao, tipoCarga, origem, destino, precoFrete } = req.body;
   const foto = req.file ? req.file.filename : null;
-  const idUsuario = req.user.id; // Assuming you have user authentication and user ID is available
-
+  const idUsuario = 2; // Para teste
+  
   const query = `
-    INSERT INTO tbCarga (descricao, tipoCarga, origem, destino, precoFrete, foto, idUsuario, estado)
+    INSERT INTO tbCarga (descricao, tipoCarga, origem, destino, precoFrete, caminhoFoto, idUsuario, estado)
     VALUES (?, ?, ?, ?, ?, ?, ?, 'pendente')
   `;
 
   db.query(query, [descricao, tipoCarga, origem, destino, precoFrete, foto, idUsuario], (err, results) => {
     if (err) {
+      console.log(err);
       return res.status(500).json({ error: err.message });
     }
     res.status(201).json({ message: 'Carga adicionada com sucesso!' });

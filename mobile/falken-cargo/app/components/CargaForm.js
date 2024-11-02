@@ -3,6 +3,8 @@ import { View, Text, TextInput, Button, ScrollView, StyleSheet, Image, Alert } f
 import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios';
+import { API_BASE_URL } from '@env';
+
 
 const CargaForm = () => {
   const [descricao, setDescricao] = useState('');
@@ -40,13 +42,15 @@ const CargaForm = () => {
     }
 
     try {
-      const response = await axios.post('http://your-server-url/cargas', formData, {
+      const response = await axios.post( `${API_BASE_URL}/api/cargas/add`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
       Alert.alert('Sucesso', 'Carga adicionada com sucesso!');
     } catch (error) {
+      console.log(error);
+      
       Alert.alert('Erro', 'Ocorreu um erro ao adicionar a carga.');
     }
   };

@@ -2,27 +2,19 @@ import { View, Text, ScrollView, RefreshControl, LogBox } from 'react-native';
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { API_BASE_URL } from '@env';
-import ListaPropostas from '../components/ListaPropostas';
-import { useAuth } from '../context/AuthContext';
+import ListaCargas from '../../components/ListaCargas';
 
-
-export default function PropostaScreen() {
-  const [Propostas, setPropostas] = useState([]);
+export default function CargaScreen() {
+  const [cargas, setCargas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const { user } = useAuth();
 
-  const fetchPropostas = async () => {
+  const fetchCargas = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/propostas`, {
-        params: {
-          idTransportadora: user.idTransportadora
-        }
-      });
-      setPropostas(response.data);
-      
+      const response = await axios.get(`${API_BASE_URL}/api/cargas`);
+      setCargas(response.data);
     } catch (error) {
-      console.error('Error fetching Propostas:', error);
+      console.error('Error fetching cargas:', error);
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -30,7 +22,7 @@ export default function PropostaScreen() {
   };
 
   useEffect(() => {
-    fetchPropostas();
+    fetchCargas();
     LogBox.ignoreLogs([
       'VirtualizedLists should never be nested inside plain ScrollViews with the same orientation',
     ]);
@@ -38,7 +30,7 @@ export default function PropostaScreen() {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    fetchPropostas();
+    fetchCargas();
   }, []);
 
   if (loading) {
@@ -55,7 +47,7 @@ export default function PropostaScreen() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <ListaPropostas Propostas={Propostas} />
+      <ListaCargas Cargas={cargas} />
     </ScrollView>
   );
 }

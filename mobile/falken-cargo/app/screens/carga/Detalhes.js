@@ -2,7 +2,7 @@ import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity, ScrollView
 import React from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import { API_BASE_URL } from '@env';
 import axios from 'axios';
 

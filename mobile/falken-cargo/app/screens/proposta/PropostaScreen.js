@@ -2,19 +2,27 @@ import { View, Text, ScrollView, RefreshControl, LogBox } from 'react-native';
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { API_BASE_URL } from '@env';
-import ListaCargas from '../components/ListaCargas';
+import ListaPropostas from '../../components/ListaPropostas';
+import { useAuth } from '../../context/AuthContext';
 
-export default function CargaScreen() {
-  const [cargas, setCargas] = useState([]);
+
+export default function PropostaScreen() {
+  const [Propostas, setPropostas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const { user } = useAuth();
 
-  const fetchCargas = async () => {
+  const fetchPropostas = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/cargas`);
-      setCargas(response.data);
+      const response = await axios.get(`${API_BASE_URL}/api/propostas`, {
+        params: {
+          idTransportadora: user.idTransportadora
+        }
+      });
+      setPropostas(response.data);
+      
     } catch (error) {
-      console.error('Error fetching cargas:', error);
+      console.error('Error fetching Propostas:', error);
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -22,7 +30,7 @@ export default function CargaScreen() {
   };
 
   useEffect(() => {
-    fetchCargas();
+    fetchPropostas();
     LogBox.ignoreLogs([
       'VirtualizedLists should never be nested inside plain ScrollViews with the same orientation',
     ]);
@@ -30,7 +38,7 @@ export default function CargaScreen() {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    fetchCargas();
+    fetchPropostas();
   }, []);
 
   if (loading) {
@@ -47,7 +55,7 @@ export default function CargaScreen() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <ListaCargas Cargas={cargas} />
+      <ListaPropostas Propostas={Propostas} />
     </ScrollView>
   );
 }
