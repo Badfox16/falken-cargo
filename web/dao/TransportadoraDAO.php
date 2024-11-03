@@ -16,13 +16,14 @@ class TransportadoraDAO implements CrudInterface {
         if (!$entity instanceof Transportadora) {
             throw new InvalidArgumentException('Expected instance of Transportadora');
         }
-        $stmt = $this->pdo->prepare("INSERT INTO tbTransportadora (nome, email, telefone, caminhoFoto, endereco) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $this->pdo->prepare("INSERT INTO tbTransportadora (nome, email, telefone, caminhoFoto, endereco, senha) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             $entity->getNome(),
             $entity->getEmail(),
             $entity->getTelefone(),
             $entity->getCaminhoFoto(),
-            $entity->getEndereco()
+            $entity->getEndereco(),
+            $entity->getSenha()
         ]);
     }
 
