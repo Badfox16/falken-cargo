@@ -14,7 +14,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li>
-            <a href="../Transportadora/" class="nav-link my-4 text-white btn d-flex align-items-center" style="background-color: #343a40; border: none;">
+            <a href="../transportadora/" class="nav-link my-4 text-white btn d-flex align-items-center" style="background-color: #343a40; border: none;">
                 <strong>
                 <i class="fa fa-truck mx-2"></i>
                 <span>Transportadoras</span>
@@ -22,7 +22,7 @@
             </a>
         </li>
         <li>
-            <a href="../Usuario/" class="nav-link text-white mb-4 btn d-flex align-items-center" style="background-color: #343a40; border: none;">
+            <a href="../usuario/" class="nav-link text-white mb-4 btn d-flex align-items-center" style="background-color: #343a40; border: none;">
                 <strong>
                     <i class="fa fa-users mx-2"></i>
                     <span>Usuarios</span>
@@ -30,7 +30,7 @@
             </a>
         </li>
         <li>
-            <a href="../Carga/" class="nav-link text-white mb-4 btn d-flex align-items-center" style="background-color: #343a40; border: none;">
+            <a href="../carga/" class="nav-link text-white mb-4 btn d-flex align-items-center" style="background-color: #343a40; border: none;">
                 <strong>
                     <i class="fa fa-box mx-2"></i>
                     <span>Cargas</span>

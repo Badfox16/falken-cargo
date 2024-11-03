@@ -37,7 +37,7 @@ $Transportadoras = $TransportadoraDAO->getAll();
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="post" action="../../controllers/Transportadora/criar.php" enctype="multipart/form-data">
+                                    <form method="post" action="../../controllers/transportadora/criar.php" enctype="multipart/form-data">
                                         <div class="mb-3">
                                             <label for="Transportadora" class="form-label">Nome da Transportadora:</label>
                                             <input type="text" class="form-control" name="nome" placeholder="Insira o nome da Transportadora" required>

@@ -2,7 +2,7 @@ CREATE DATABASE bdfalkencargo
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
 
-USE falkencargo;
+USE bdfalkencargo;
 
 CREATE TABLE tbUsuario (
     idUsuario INT AUTO_INCREMENT PRIMARY KEY,

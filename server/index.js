@@ -9,6 +9,7 @@ dotenv.config();
 
 const userRoutes = require('./routes/userRoutes');
 const cargaRoutes = require('./routes/cargaRoutes');
+const transportadoraRoutes = require('./routes/transportadoraRoutes');
 const propostaRoutes = require('./routes/propostaRoutes');
 
 const app = express();
@@ -23,6 +24,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/api/users', userRoutes);
 app.use('/api/cargas', cargaRoutes);
+app.use('/api/transportadoras', transportadoraRoutes);
 app.use('/api/propostas', propostaRoutes);
 
 const PORT = process.env.PORT || 3001;

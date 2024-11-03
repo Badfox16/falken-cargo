@@ -78,11 +78,11 @@ const styles = StyleSheet.create({
     width: '80%',
     padding: 10,
     borderWidth: 1,
-    borderColor: '#tomato',
+    borderColor: 'green',
     marginVertical: 5,
   },
   button: {
-    backgroundColor: 'tomato',
+    backgroundColor: 'green',
     padding: 10,
     marginVertical: 10,
     width: '80%',
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   linkText: {
-    color: 'tomato',
+    color: 'green',
   },
   userText: {
     fontSize: 18,
