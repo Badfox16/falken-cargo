@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     tituloSec: {
         fontSize: 14,
         fontWeight: 'bold',
-        color: 'gray',
+        color: 'green',
     },
     texto: {
         fontSize: 14,

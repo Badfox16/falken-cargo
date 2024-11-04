@@ -4,34 +4,21 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useAuth } from '../../context/AuthContext';
 import { API_BASE_URL } from '@env';
-import axios from 'axios';
 
 export default function Carga() {
     const Carga = useRoute().params.Carga
     const navigation = useNavigation()
     const { user } = useAuth();
 
-    const salvar = async () => {
-        try {
-            const response = await axios.post(`${API_BASE_URL}/api/propostas/criar`, {
-                idTransportadora: user?.idTransportadora,
-                idCarga: Carga.idCarga,
-            });
-            if (response.status === 201) {
-                alert('Proposta submetida com sucesso!');
-            } else {
-                alert('Falha ao submeter a proposta.');
-            }
-        } catch (error) {
-            console.error('Erro ao submeter a proposta:', error);
-            alert('Erro ao submeter a proposta.');
-        }
+    const editarCarga = () => {
+        navigation.navigate('EditarCarga', { Carga });
     }
+
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false} >
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10 }}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Ionicons name="arrow-back-circle-outline" size={28} color={'tomato'} />
+                    <Ionicons name="arrow-back-circle-outline" size={28} color={'green'} />
                 </TouchableOpacity>
             </View>
             <Image source={{ uri: `${API_BASE_URL}${Carga.caminhoFoto}` }} style={styles.imagem} />
@@ -49,16 +36,12 @@ export default function Carga() {
                 <Text style={styles.texto}> {Carga.destino}</Text>
             </View>
             <View style={{ display: 'flex', flexDirection: 'row' }}>
-                <Text style={styles.titulo2}>Contratante:</Text>
-                <Text style={styles.description}> {Carga.nome} {Carga.apelido}</Text>
-            </View>
-            <View style={{ display: 'flex', flexDirection: 'row' }}>
                 <Text style={styles.titulo2}>Preço:</Text>
                 <Text style={styles.texto}> {Carga.precoFrete},00 MZN</Text>
             </View>
-            <TouchableOpacity onPress={() => salvar()} style={{ marginTop: 20, alignItems: 'center' }}>
-                <View style={{ backgroundColor: 'tomato', padding: 10, borderRadius: 5 }}>
-                    <Text style={{ color: 'white', fontWeight: 'bold' }}>Submeter Proposta</Text>
+            <TouchableOpacity onPress={() => editarCarga()} style={{ marginTop: 20, alignItems: 'center' }}>
+                <View style={{ backgroundColor: 'green', padding: 10, borderRadius: 5 }}>
+                    <Text style={{ color: 'white', fontWeight: 'bold' }}>Editar Carga</Text>
                 </View>
             </TouchableOpacity>
         </ScrollView>
@@ -78,13 +61,13 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginTop: 5,
-        color: 'tomato',
+        color: 'green',
     },
     titulo2: {
         fontSize: 16,
         fontWeight: 'bold',
         marginTop: 5,
-        color: 'tomato',
+        color: 'green',
     },
     texto: {
         color: 'gray',
