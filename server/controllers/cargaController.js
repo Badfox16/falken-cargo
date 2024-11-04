@@ -18,9 +18,8 @@ exports.getAllCargas = (req, res) => {
 };
 
 exports.addCarga = (req, res) => {
-  const { descricao, tipoCarga, origem, destino, precoFrete } = req.body;
+  const { descricao, tipoCarga, origem, destino, precoFrete, idUsuario } = req.body;
   const foto = req.file ? req.file.filename : null;
-  const idUsuario = 2; // Para teste
   
   const query = `
     INSERT INTO tbCarga (descricao, tipoCarga, origem, destino, precoFrete, caminhoFoto, idUsuario, estado)
@@ -49,5 +48,23 @@ exports.getCargasByUsuario = (req, res) => {
       return res.status(500).json({ error: err.message });
     }
     res.status(200).json(results);
+  });
+};
+
+exports.editCarga = (req, res) => {
+  const { descricao, tipoCarga, origem, destino, precoFrete, idCarga  } = req.body;
+  const foto = req.file ? req.file.filename : null;
+
+  const query = `
+    UPDATE tbCarga
+    SET descricao = ?, tipoCarga = ?, origem = ?, destino = ?, precoFrete = ?, caminhoFoto = ?
+    WHERE idCarga = ?
+  `;
+
+  db.query(query, [descricao, tipoCarga, origem, destino, precoFrete, foto, idCarga], (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    res.status(200).json({ message: 'Carga atualizada com sucesso!' });
   });
 };

@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const path = require('path');
+const cargaController = require('./controllers/cargaController');
+const upload = require('./config/upload');
+const router = express.Router();
 
 dotenv.config();
 
@@ -15,7 +18,7 @@ const propostaRoutes = require('./routes/propostaRoutes');
 const app = express();
 
 app.use(cors({
-  origin: 'exp://192.168.43.11:8081'
+  origin: '*',
 }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
@@ -26,6 +29,9 @@ app.use('/api/users', userRoutes);
 app.use('/api/cargas', cargaRoutes);
 app.use('/api/transportadoras', transportadoraRoutes);
 app.use('/api/propostas', propostaRoutes);
+
+// Editar uma carga
+router.post('/edit', upload.single('foto'), cargaController.editCarga);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

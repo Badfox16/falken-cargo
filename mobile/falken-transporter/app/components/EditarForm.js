@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, Button, ScrollView, StyleSheet, Image, Alert, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
@@ -11,6 +11,7 @@ const EditarForm = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const { Carga } = route.params;
+  const idCarga = Carga.idCarga;
 
   const [descricao, setDescricao] = useState(Carga.descricao);
   const [tipoCarga, setTipoCarga] = useState(Carga.tipoCarga);
@@ -34,28 +35,55 @@ const EditarForm = () => {
 
   const handleSubmit = async () => {
     const formData = new FormData();
+    formData.append('idCarga', idCarga);
     formData.append('descricao', descricao);
     formData.append('tipoCarga', tipoCarga);
     formData.append('origem', origem);
     formData.append('destino', destino);
     formData.append('precoFrete', precoFrete);
-    if (foto) {
+    if (foto && !foto.startsWith('/uploads')) {
+      // Foto selecionada do dispositivo
       const filename = foto.split('/').pop();
       const match = /\.(\w+)$/.exec(filename);
       const type = match ? `image/${match[1]}` : `image`;
       formData.append('foto', { uri: foto, name: filename, type });
+    } else if (foto) {
+      // Foto existente do servidor
+      const filename = foto.split('/').pop();
+      const match = /\.(\w+)$/.exec(filename);
+      const type = match ? `image/${match[1]}` : `image`;
+      formData.append('foto', { uri: `${API_BASE_URL}${foto}`, name: filename, type });
     }
-
     try {
-      const response = await axios.put(`${API_BASE_URL}/cargas/${Carga.idCarga}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      const response = await axios.post(`${API_BASE_URL}/api/cargas/edit`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
       });
+      if (response.status === 200) {
       Alert.alert('Sucesso', 'Carga atualizada com sucesso!');
       navigation.goBack();
-    } catch (error) {
+      } else {
       Alert.alert('Erro', 'Ocorreu um erro ao atualizar a carga.');
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar a carga:', error);
+      if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.error('Dados do erro:', error.response.data);
+      console.error('Status do erro:', error.response.status);
+      console.error('Cabeçalhos do erro:', error.response.headers);
+      Alert.alert('Erro', `Erro ao atualizar a carga: ${error.response.data.message || 'Erro desconhecido'}`);
+      } else if (error.request) {
+      // The request was made but no response was received
+      console.error('Nenhuma resposta recebida:', error.request);
+      Alert.alert('Erro', 'Nenhuma resposta recebida do servidor.');
+      } else {
+      // Something happened in setting up the request that triggered an Error
+      console.error('Erro ao configurar a solicitação:', error.message);
+      Alert.alert('Erro', `Erro ao configurar a solicitação: ${error.message}`);
+      }
     }
   };
 
@@ -135,7 +163,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 5,
-    color: 'green',
+    color: '#333',
   },
   input: {
     height: 40,
@@ -175,7 +203,7 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     backgroundColor: 'green',
-    padding: 12,
+    padding: 15,
     borderRadius: 5,
     alignItems: 'center',
   },

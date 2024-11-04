@@ -5,7 +5,8 @@ import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios';
 import { API_BASE_URL } from '@env';
 import { Ionicons } from '@expo/vector-icons';
-
+import { useAuth } from '../context/AuthContext';
+import { useNavigation } from '@react-navigation/native';
 
 const CargaForm = () => {
   const [descricao, setDescricao] = useState('');
@@ -14,6 +15,10 @@ const CargaForm = () => {
   const [destino, setDestino] = useState('');
   const [precoFrete, setPrecoFrete] = useState('');
   const [foto, setFoto] = useState(null);
+  const idUsuario = user?.idUsuario;
+
+  const navigation = useNavigation();
+
 
   const handlePhotoSelection = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -31,6 +36,7 @@ const CargaForm = () => {
   const handleSubmit = async () => {
     const formData = new FormData();
     formData.append('descricao', descricao);
+    formData.append('idUsuario', idUsuario);
     formData.append('tipoCarga', tipoCarga);
     formData.append('origem', origem);
     formData.append('destino', destino);
@@ -49,6 +55,7 @@ const CargaForm = () => {
         },
       });
       Alert.alert('Sucesso', 'Carga adicionada com sucesso!');
+      navigation.goBack();
     } catch (error) {
       console.log(error);
       
