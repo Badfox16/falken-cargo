@@ -11,10 +11,11 @@ export default function PropostaScreen() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const { user } = useAuth();
+  const idUsuario = user.idUsuario
 
   const fetchPropostas = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/propostas`, {
+      const response = await axios.get(`${API_BASE_URL}/api/propostas/minhas/?idUsuario=${idUsuario}`, {
         params: {
           idTransportadora: user.idTransportadora
         }

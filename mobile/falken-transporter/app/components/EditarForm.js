@@ -62,7 +62,7 @@ const EditarForm = () => {
       });
       if (response.status === 200) {
       Alert.alert('Sucesso', 'Carga atualizada com sucesso!');
-      navigation.goBack();
+      navigation.navigate('Cargas');
       } else {
       Alert.alert('Erro', 'Ocorreu um erro ao atualizar a carga.');
       }

@@ -30,11 +30,11 @@ function ListaPropostas({ Propostas }) {
                                 <Text style={styles.tituloSec}>Tipo - {(item?.tipoCarga)}</Text>
                                 <View style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
                                     <View style={styles.estadoContainer}>
-                                        <MaterialIcons name="date-range" size={16} color="tomato" />
+                                        <MaterialIcons name="date-range" size={16} color="green" />
                                         <Text style={styles.texto}>Data: {formatDate(item.dataProposta)}</Text>
                                     </View>
                                     <View style={styles.estadoContainer}>
-                                        <MaterialIcons name="info" size={16} color="tomato" />
+                                        <MaterialIcons name="info" size={16} color="green" />
                                         <Text style={styles.texto}>Estado: {capitalizeFirstLetter(item.estado)}</Text>
                                     </View>
                                 </View>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     },
     tituloSec: {
         fontSize: 14,
-        color: 'tomato',
+        color: 'green',
         fontWeight: 'bold',
         marginTop: 5,
     },

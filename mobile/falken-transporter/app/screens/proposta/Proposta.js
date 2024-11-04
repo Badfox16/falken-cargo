@@ -16,7 +16,7 @@ export default function Proposta() {
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false} >
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10 }}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Ionicons name="arrow-back-circle-outline" size={28} color={'tomato'} />
+                    <Ionicons name="arrow-back-circle-outline" size={28} color={'green'} />
                 </TouchableOpacity>
             </View>
             <Image source={{ uri: `${API_BASE_URL}${Proposta.caminhoFoto}` }} style={styles.imagem} />
@@ -70,13 +70,13 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginTop: 5,
-        color: 'tomato',
+        color: 'green',
     },
     titulo2: {
         fontSize: 16,
         fontWeight: 'bold',
         marginTop: 5,
-        color: 'tomato',
+        color: 'green',
     },
     texto: {
         color: 'gray',

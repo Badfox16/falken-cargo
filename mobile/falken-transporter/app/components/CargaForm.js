@@ -15,6 +15,7 @@ const CargaForm = () => {
   const [destino, setDestino] = useState('');
   const [precoFrete, setPrecoFrete] = useState('');
   const [foto, setFoto] = useState(null);
+  const user = useAuth()
   const idUsuario = user?.idUsuario;
 
   const navigation = useNavigation();
