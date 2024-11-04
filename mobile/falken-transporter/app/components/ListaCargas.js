@@ -3,12 +3,19 @@ import { FlatList, Image, StyleSheet, Text, TouchableOpacity } from 'react-nativ
 import { View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { API_BASE_URL } from '@env';
+import { Ionicons } from '@expo/vector-icons'; // Importar ícone
 
 function ListaCargas({ Cargas }) {
     const navigation = useNavigation()
 
     return (
         <View style={{marginHorizontal: 10}}>
+            <TouchableOpacity 
+                style={styles.addButton} 
+                onPress={() => navigation.navigate('CriarCarga')}
+            >
+                <Ionicons name="add-circle" size={50} color="green" />
+            </TouchableOpacity>
             <FlatList
                 data={Cargas}
                 nestedScrollEnabled={true}
@@ -42,42 +49,34 @@ const styles = StyleSheet.create({
     },
     container: {
         margin: 10,
-        display: 'flex',
         flexDirection: 'row',
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        padding: 10,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.8,
-        shadowRadius: 2,
-        elevation: 5,
+        alignItems: 'center',
     },
-    titulo: {
-        fontSize: 15,
-        fontWeight: 'bold',
-        color: 'grey'
-    },
-    tituloSec: {
-        fontSize: 13,
-        fontWeight: 'bold',
-        marginBottom: 5,
-        color: 'tomato',
-    },
-    texto: {
-        marginTop: 1,
-        color: '#030405',
-        fontSize: 13,
+    addButton: {
+        alignItems: 'center',
+        marginVertical: 10,
     },
     textoLista: {
-        marginRight: 130,
         marginLeft: 10,
+        flex: 1,
+    },
+    titulo: {
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    tituloSec: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: 'gray',
+    },
+    texto: {
+        fontSize: 14,
     },
     borda: {
-        height: 1,
-        backgroundColor: 'tomato',
-        marginTop: 5,
-        marginLeft: -20
-    }
-})
-export default ListaCargas
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+        marginHorizontal: 10,
+    },
+});
+
+export default ListaCargas;

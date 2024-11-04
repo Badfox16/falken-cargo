@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, ScrollView, StyleSheet, Image, Alert } from 'react-native';
+import { View, Text, TextInput, Button, ScrollView, StyleSheet, Image, Alert, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios';
 import { API_BASE_URL } from '@env';
+import { Ionicons } from '@expo/vector-icons';
 
 
 const CargaForm = () => {
@@ -110,34 +111,78 @@ const CargaForm = () => {
         required
       />
 
-      <Text style={styles.label}>Foto:</Text>
-      <Button title="Escolher Foto" onPress={handlePhotoSelection} />
+<TouchableOpacity style={styles.photoButton} onPress={handlePhotoSelection}>
+        <Ionicons name="camera" size={24} color="white" />
+        <Text style={styles.photoButtonText}>Selecionar Foto</Text>
+      </TouchableOpacity>
+
       {foto && <Image source={{ uri: foto }} style={styles.image} />}
 
-      <Button title="Cadastrar" onPress={handleSubmit} />
+      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+        <Text style={styles.submitButtonText}>Adicionar Carga</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flexGrow: 1,
     padding: 20,
+    backgroundColor: '#f5f5f5',
   },
   label: {
-    marginVertical: 10,
+    fontSize: 16,
     fontWeight: 'bold',
+    marginBottom: 5,
+    color: '#333',
   },
   input: {
-    borderWidth: 1,
+    height: 40,
     borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginBottom: 15,
+    backgroundColor: '#fff',
+  },
+  picker: {
+    height: 50,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
+    marginBottom: 15,
+    backgroundColor: '#fff',
+  },
+  photoButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#007bff',
     padding: 10,
     borderRadius: 5,
-    marginBottom: 20,
+    marginBottom: 15,
+  },
+  photoButtonText: {
+    color: 'white',
+    marginLeft: 10,
   },
   image: {
-    width: 100,
-    height: 100,
-    marginVertical: 10,
+    width: '100%',
+    height: 200,
+    borderRadius: 5,
+    marginBottom: 15,
+  },
+  submitButton: {
+    backgroundColor: 'green',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  submitButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
