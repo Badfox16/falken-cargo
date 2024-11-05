@@ -19,6 +19,8 @@ const TabNavigator = () => {
             iconName = 'cube-outline';
           } else if (route.name === 'Transportadoras') {
             iconName = 'car-outline';
+          } else if (route.name === 'Perfil') {
+            iconName = 'person-outline';
           } else if (route.name === 'Propostas') {
             iconName = 'document-text-outline';
           }
@@ -32,6 +34,7 @@ const TabNavigator = () => {
       <Tab.Screen name="Transportadoras" component={TransportadoraScreen} />
       <Tab.Screen name="Cargas" component={CargaScreen} />
       <Tab.Screen name="Propostas" component={PropostaScreen} />
+      <Tab.Screen name='Perfil' component={HomeScreen}/>
     </Tab.Navigator>
   );
 };

@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         width: 110,
         height: 100,
         borderRadius: 10,
+        resizeMode: 'contain',
     },
     container: {
         margin: 10,

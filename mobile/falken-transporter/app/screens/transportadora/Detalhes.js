@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity, ScrollView, Share } from 'react-native'
+import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity, ScrollView} from 'react-native'
 import React from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
         height: Dimensions.get('screen').width * 0.75,
         borderRadius: 15,
         width: '100%',
+        resizeMode: 'contain',
     },
     titulo: {
         fontSize: 20,

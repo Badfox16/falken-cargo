@@ -5,7 +5,6 @@ import { API_BASE_URL } from '@env';
 import ListaPropostas from '../../components/ListaPropostas';
 import { useAuth } from '../../context/AuthContext';
 
-
 export default function PropostaScreen() {
   const [Propostas, setPropostas] = useState([]);
   const [loading, setLoading] = useState(true);

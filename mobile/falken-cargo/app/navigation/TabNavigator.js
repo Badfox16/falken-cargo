@@ -16,8 +16,8 @@ const TabNavigator = () => {
           let iconName;
           if (route.name === 'Cargas') {
             iconName = 'cube-outline';
-          } else if (route.name === 'Home') {
-            iconName = 'home-outline';
+          } else if (route.name === 'Perfil') {
+            iconName = 'person-outline';
           } else if (route.name === 'Propostas') {
             iconName = 'document-text-outline';
           }
@@ -28,7 +28,7 @@ const TabNavigator = () => {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Perfil" component={HomeScreen} />
       <Tab.Screen name="Cargas" component={CargaScreen} />
       <Tab.Screen name="Propostas" component={PropostaScreen} />
     </Tab.Navigator>
