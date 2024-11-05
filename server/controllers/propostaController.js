@@ -36,16 +36,40 @@ exports.getPropostasByUsuario = (req, res) => {
 
     const query = `
         SELECT p.*, c.descricao, c.tipoCarga, c.origem, c.destino, c.precoFrete, c.caminhoFoto, c.estado AS estadoCarga,
-               u.nome AS nomeUsuario, u.apelido AS apelidoUsuario
+               t.nome AS nomeTransportadora, t.endereco AS enderecoTransportadora
         FROM tbProposta p
         JOIN tbCarga c ON p.idCarga = c.idCarga
-        JOIN tbUsuario u ON c.idUsuario = u.idUsuario
-        WHERE u.idUsuario = ?;
+        JOIN tbTransportadora t ON p.idTransportadora = t.idTransportadora
+        WHERE c.idUsuario = ?;
     `;
     db.query(query, [idUsuario], (err, results) => {
         if (err) {
             return res.status(500).send('Error retrieving proposals');
         }
         res.status(200).json(results);
+    });
+};
+
+exports.aceitarProposta = (req, res) => {
+    const { idProposta } = req.body;
+
+    const query = 'UPDATE tbProposta SET estado = "aceita" WHERE idProposta = ?';
+    db.query(query, [idProposta], (err, result) => {
+        if (err) {
+            return res.status(500).send('Error accepting proposal');
+        }
+        res.status(200).send('Proposal accepted successfully');
+    });
+};
+
+exports.recusarProposta = (req, res) => {
+    const { idProposta } = req.body;
+
+    const query = 'UPDATE tbProposta SET estado = "rejeitada" WHERE idProposta = ?';
+    db.query(query, [idProposta], (err, result) => {
+        if (err) {
+            return res.status(500).send('Error rejecting proposal');
+        }
+        res.status(200).send('Proposal rejected successfully');
     });
 };

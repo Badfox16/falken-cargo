@@ -56,7 +56,7 @@ export default function Login() {
         <Text style={styles.buttonText}>Entrar</Text>
       </Pressable>
       <Pressable style={styles.link} onPress={() => navigation.navigate('Cadastro')}>
-        <Text style={styles.linkText}>Não tem uma conta? Faça o seu cadastro</Text>
+        {/* <Text style={styles.linkText}>Não tem uma conta? Faça o seu cadastro</Text> */}
       </Pressable>
     </View>
   );

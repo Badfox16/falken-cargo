@@ -3,6 +3,7 @@ import React from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { API_BASE_URL } from '@env';
+import axios from 'axios';
 
 export default function Proposta() {
     const Proposta = useRoute().params.Proposta
@@ -12,6 +13,34 @@ export default function Proposta() {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
 
+    const handleAcceptProposal = async () => {
+        try {
+            const response = await axios.put(`${API_BASE_URL}/api/propostas/aceitar/${Proposta.idProposta}`, {
+                idProposta: Proposta.idProposta
+            });
+            if (response.status === 200) {
+                alert('Proposta aceita com sucesso!');
+                navigation.goBack();
+            }
+        } catch (error) {
+            alert('Erro ao aceitar a proposta');
+        }
+    };
+
+    const handleRejectProposal = async () => {
+        try {
+            const response = await axios.put(`${API_BASE_URL}/api/propostas/recusar/${Proposta.idProposta}`, {
+                idProposta: Proposta.idProposta
+            });
+            if (response.status === 200) {
+                alert('Proposta recusada com sucesso!');
+                navigation.goBack();
+            }
+        } catch (error) {
+            alert('Erro ao recusar a proposta');
+        }
+    };
+    
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false} >
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10 }}>
@@ -34,12 +63,16 @@ export default function Proposta() {
                 <Text style={styles.texto}> {Proposta.destino}</Text>
             </View>
             <View style={{ display: 'flex', flexDirection: 'row' }}>
-                <Text style={styles.titulo2}>Contratante:</Text>
-                <Text style={styles.description}> {Proposta.nomeUsuario} {Proposta.apelidoUsuario}</Text>
+                <Text style={styles.titulo2}>Transportadora:</Text>
+                <Text style={styles.description}> {Proposta.nomeTransportadora}</Text>
             </View>
             <View style={{ display: 'flex', flexDirection: 'row' }}>
                 <Text style={styles.titulo2}>Preço:</Text>
                 <Text style={styles.texto}> {Proposta.precoFrete},00 MZN</Text>
+            </View>
+            <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <Text style={styles.titulo2}>Endereço da Transportadora:</Text>
+                <Text style={[styles.description, { flex: 1, flexWrap: 'wrap' }]}> {Proposta.enderecoTransportadora}</Text>
             </View>
             <View style={{ display: 'flex', flexDirection: 'row' }}>
                 <Text style={styles.titulo2}>Estado da Proposta:</Text>
@@ -53,6 +86,17 @@ export default function Proposta() {
                 <Text style={styles.titulo2}>Estado da Carga:</Text>
                 <Text style={styles.texto}> {capitalizeFirstLetter(Proposta.estadoCarga)}</Text>
             </View>
+        
+        {Proposta.estado.toLowerCase() === 'pendente' && (
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginVertical: 20 }}>
+                <TouchableOpacity style={styles.buttonAccept} onPress={handleAcceptProposal}>
+                    <Text style={styles.buttonText}>Aceitar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonReject} onPress={handleRejectProposal}>
+                    <Text style={styles.buttonText}>Recusar</Text>
+                </TouchableOpacity>
+            </View>
+        )}
         </ScrollView>
     )
 }
@@ -94,5 +138,24 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: 'bold',
         color: 'gray',
+    },
+    buttonAccept: {
+        backgroundColor: 'green',
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+        width: '40%',
+    },
+    buttonReject: {
+        backgroundColor: 'red',
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+        width: '40%',
+    },
+    buttonText: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 16,
     }
 })
